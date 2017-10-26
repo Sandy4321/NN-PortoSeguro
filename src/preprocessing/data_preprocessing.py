@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 25 00:17:59 2017
+
+@author: andersonduran
+"""
 import pandas as pd
 import numpy as np
 
@@ -86,6 +92,14 @@ X_chalenge = df_test.iloc[:, 0:51].values
 from sklearn.cross_validation import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(Xt, yt, test_size=0.2)
 X_train, X_dev, y_train, y_dev = train_test_split(Xt, yt, test_size=0.2)
+
+#DATASET SCALING AND NORMALIZATION STEP
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_dev = sc.transform(X_dev)
+X_test = sc.transform(X_test)
+X_chalenge = sc.transform(X_chalenge)
 
 #SAVE IT TO THE H5 FILE
 import h5py
